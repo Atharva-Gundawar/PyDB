@@ -38,3 +38,6 @@ client = MongoClient('localhost',username="<X.509 derived username>",authMechani
 # Authenticate using AWS IAM credentials
 # The access_key_id and secret_access_key passed into the URI MUST be percent escaped.
 client = MongoClient("mongodb://<access_key_id>:<secret_access_key>@localhost/?authMechanism=MONGODB-AWS")
+
+# Check status
+print(client.stats) 
