@@ -16,7 +16,11 @@ collection_names = client.list_collection_names()
 
 # Create a new collection
 # create a new collection called contacts and assign a default collation with the fr_CA locale
-collection = db.create_collection('contacts',collation=Collation(locale='fr_CA'))
+collection = db.create_collection(
+    'contacts', collation=Collation(locale='fr_CA'))
 
 # Delete collection
 db.drop_collection('addressbook')
+
+# Count Documents
+collection.count_documents({"query": "query"})
