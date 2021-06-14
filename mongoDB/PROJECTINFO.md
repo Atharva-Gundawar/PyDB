@@ -6,13 +6,15 @@
 ## File Structure
 
 ```markdown
-  ├── collections.py      <- DSC
-  ├── connections.py      <- DSC
-  ├── databases.py        <- DSC
-  ├── Pipfile             <- DSC
-  ├── PROJECTINFO.md      <- DSC
-  ├── README.md           <- DSC
-  └── requirements.txt    <- DSC
+  ├── collections.py            <- DSC
+  ├── connections.py            <- DSC
+  ├── databases.py              <- DSC
+  ├── MongoDb_on_colab.ipynb    <- DSC
+  ├── Pipfile                   <- DSC
+  ├── PROJECTINFO.md            <- DSC
+  ├── queryOperators.py         <- DSC
+  ├── README.md                 <- DSC
+  └── requirements.txt          <- DSC
 
 ```
 
