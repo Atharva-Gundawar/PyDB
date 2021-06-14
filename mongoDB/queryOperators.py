@@ -12,7 +12,7 @@ collection = db.some_collection
 data = {  'name' : "Atharva Gundawar" , 
           'age' : 100,
           'gender' : "Male",
-          'randomList': ['hello','hello again','hello once more'] # Array        
+          'greetings': ['hello','hello again','hello once more'] # Array        
        }
 
 #Insert one data/document
@@ -33,9 +33,25 @@ print(list(collection.find( {'_id' : insert_result.inserted_id })))
 # find, can use one key or more
 list(collection.find( {'name' : "Atharva" }))                    
 
-# gets a Limited set of documents
-list(collection.find().limit(1))                             
+n = 5
 
-# gets all documents skipping first
-list(collection.find().skip(1))                              
+# gets first n documents matching the given query
+list(collection.find().limit(n))                             
 
+# gets all documents skipping first n documents
+list(collection.find().skip(n))                              
+
+# Update an existing document
+update_result = collection.update_one( 
+    {'name' : "Atharva"}, 
+    {'$set' : { 'age' : 50 }}
+    ) 
+# or
+collection.find_one_and_update( {'name' : "Atharva"}, {'$set' : { 'age' : 50 }})
+
+# Insert a new document with update, will avoid to crash during insert if document already exist
+insert_result = collection.update_one( {'name' : 'Atharva'}, {'$set' : { 'age' : 50 }}, upsert= True)
+
+# show update results
+print(update_result.raw_result)
+print(update_result.acknowledged)
