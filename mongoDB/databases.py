@@ -18,7 +18,7 @@ client = MongoClient('mongodb://host/<DATABASE_NAME>')
 db = client.get_default_database()
 
 # Get a cursor over the databases of the connected server.
-client.list_databases(session = None)
+client.list_databases(session=None)
 
 # Drop a database.
-client.drop_database(name_or_database = '<DATABASE_NAME>')
+client.drop_database(name_or_database='<DATABASE_NAME>')
