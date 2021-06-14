@@ -48,7 +48,8 @@ update_result = collection.update_one(
     {'$set': {'age': 50}}
 )
 # or
-collection.find_one_and_update({'name': "Atharva Gundawar"}, {'$set': {'age': 50}})
+collection.find_one_and_update(
+    {'name': "Atharva Gundawar"}, {'$set': {'age': 50}})
 
 # Insert a new document with update, will avoid to crash during insert if document already exist
 insert_result = collection.update_one(
@@ -57,3 +58,42 @@ insert_result = collection.update_one(
 # show update results
 print(update_result.raw_result)
 print(update_result.acknowledged)
+
+# Delete The first found document
+delete = collection.delete_one({'name': 'Atharva'})
+
+# Display deleted count
+print(delete.deleted_count)
+
+collection.insert_many([
+    {
+        'name': "Atharva Gundawar",
+        'age': 100,
+        'gender': "Male",
+        'greetings': ['hello', 'hello again', 'hello once more']
+    },
+
+    {
+        'name': "Manas Vardhan",
+        'age': 100,
+        'gender': "Male",
+        'greetings': ['kaise ho', 'yo', 'heelo']
+    },
+
+    {
+        'name': "Prannay Hebbar",
+        'age': 100,
+        'gender': "Male",
+        'greetings': ['Hey', 'Heyy there', 'Namaste']
+    }
+])
+
+print(collection.find(
+    {'$or': [{'name': 'Prannay hebbar'}, {'name': 'Manas Vardhan'}]}))
+
+# Update Multiple documents
+collection.update_many({'isActive': True}, {'$set': {'isActive': False}})
+
+# Delete Multiple documents
+# deletes as many documents as the filter
+delete = collection.delete_many({'likes_python': True})
