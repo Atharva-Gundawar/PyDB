@@ -1,6 +1,8 @@
 import datetime
 from pymongo.collation import Collation
 from pymongo import MongoClient
+import re
+import pymongo
 
 client = MongoClient()
 client = MongoClient('mongodb://localhost:27017/')
@@ -24,6 +26,9 @@ print(insert_result.acknowledged)
 
 # See the document ID
 print(insert_result.inserted_id)
+
+# Return a list of distinct values for the given key.
+print(collection.distinct("age"))
 
 # Shows all data of collection
 print(list(collection.find()))
@@ -70,21 +75,24 @@ collection.insert_many([
         'name': "Atharva Gundawar",
         'age': 100,
         'gender': "Male",
-        'greetings': ['hello', 'hello again', 'hello once more']
+        'greetings': ['hello', 'hello again', 'hello once more'],
+        'isActive': True,
     },
 
     {
         'name': "Manas Vardhan",
         'age': 100,
         'gender': "Male",
-        'greetings': ['kaise ho', 'yo', 'heelo']
+        'greetings': ['kaise ho', 'yo', 'heelo'],
+        'isActive': True,
     },
 
     {
         'name': "Prannay Hebbar",
         'age': 100,
         'gender': "Male",
-        'greetings': ['Hey', 'Heyy there', 'Namaste']
+        'greetings': ['Hey', 'Heyy there', 'Namaste'],
+        'isActive': True,
     }
 ])
 
@@ -92,7 +100,8 @@ print(collection.find(
     {'$or': [{'name': 'Prannay hebbar'}, {'name': 'Manas Vardhan'}]}))
 
 # Update Multiple documents
-collection.update_many({'isActive': True}, {'$set': {'isActive': False}})
+collection.update_many({"$or": [{"age": 28}, {"age": 29}], "gender": 'Male'}, {
+                       '$set': {'isActive': False}})
 
 # Delete Multiple documents
 # deletes as many documents as the filter
