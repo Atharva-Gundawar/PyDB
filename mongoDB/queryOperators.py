@@ -28,7 +28,7 @@ print(insert_result.acknowledged)
 print(insert_result.inserted_id)
 
 # Return a list of distinct values for the given key.
-print(collection.distinct("age"))
+print(collection.distinct( "age" ))
 
 # Shows all data of collection
 print(list(collection.find()))
@@ -106,3 +106,15 @@ collection.update_many({"$or": [{"age": 28}, {"age": 29}], "gender": 'Male'}, {
 # Delete Multiple documents
 # deletes as many documents as the filter
 delete = collection.delete_many({'likes_python': True})
+
+# Regex
+# find documents which starts with Ath
+regex = re.compile('^Ath', re.IGNORECASE)
+print(collection.find({'name': regex}, {
+      '_id': 0, 'name': 1, 'isActive': 1, 'age': 1}))
+
+# Get ordered output
+print(collection.find({'name': regex}, {'_id': 0, 'name': 1,
+      'isActive': 1, 'age': 1}).sort('age', pymongo.ASCENDING))
+# Use pymongo.DESCENDING for descending
+# Use .limit(1) to get max/min
